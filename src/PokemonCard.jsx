@@ -23,6 +23,8 @@ function PokemonCard(props) {
 
     const isInTeam = props.currentTeam === props.name;
     
+    
+    
     return (
     <div className={`pokemon-card ${typeCSS}`}>
         <h2>{props.name}</h2>

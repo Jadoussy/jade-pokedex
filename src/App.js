@@ -6,7 +6,7 @@ import { useState } from "react";
 import './PokemonCard.css';
 
 import pokemonsData from './pokemons.json';
-import PokemonList from './PokemonList';
+import DisplayPokemonList from './DisplayPokemonList';
 
 import PokemonDescription from './PokemonDescription';
 import './PokemonDescription.css';
@@ -33,7 +33,7 @@ function App() {
 
           {/* Utilisation du composant avec les data .json */}
           <div className='pokemon-list'>
-            <PokemonList pokemons={pokemons} onSelect={setMyTeam} currentTeam={myTeam} />
+            <DisplayPokemonList pokemons={pokemons} onSelect={setMyTeam} currentTeam={myTeam} />
           </div>
 
           <PokemonBattle myTeam={myTeam} onReset={() => setMyTeam("Aucun pokémon")}/>

@@ -1,6 +1,6 @@
 import PokemonCard from "./PokemonCard";
 
-function PokemonList({pokemons, onSelect, currentTeam}) {
+function DisplayPokemonList({pokemons, onSelect, currentTeam}) {
 
   return (
     <div className="pokemon-list">
@@ -18,4 +18,4 @@ function PokemonList({pokemons, onSelect, currentTeam}) {
     </div>
   );
 }
-export default PokemonList;
+export default DisplayPokemonList;
