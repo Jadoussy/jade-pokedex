@@ -1,0 +1,12 @@
+.inputDate {
+  background-color: rgba(40, 44, 52);
+  color: #8ACE00;
+  height: 50px;
+  width: 210px;
+  font-size: 30px;
+  border-radius: 0%;
+}
+
+.strongHour {
+  color: #8ACE00;
+}
