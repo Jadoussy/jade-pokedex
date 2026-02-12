@@ -48,7 +48,7 @@ const PokemonDescription = () => {
             default : 
                 setIndex(0); 
         }
-        console.log(messageDescription);
+        // console.log(messageDescription);
     }
 
     return (

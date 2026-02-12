@@ -3,18 +3,20 @@
 import './App.css';
 import { useState } from "react";
 
-import './PokemonCard.css';
+import './pokemon-card/PokemonCard.css';
 
-import pokemonsData from './pokemons.json';
-import DisplayPokemonList from './DisplayPokemonList';
+import pokemonsData from './data/pokemons.json';
+import DisplayPokemonList from './pokemon-card/DisplayPokemonList';
 
-import PokemonDescription from './PokemonDescription';
-import './PokemonDescription.css';
+import PokemonDescription from './pokemon-description/PokemonDescription';
+import './pokemon-description/PokemonDescription.css';
 
-import Welcome from './Welcome';
-import './Welcome.css';
+import Welcome from './components/Welcome';
+import './components/Welcome.css';
 
-import PokemonBattle from './PokemonBattle';
+import PokemonBattle from './pokemon-arena/PokemonBattle';
+
+import PokemonTypeFilter from './pokemon-card/PokemonTypeFilter';
 
 function App() {
 
@@ -22,6 +24,13 @@ function App() {
     const [pokemons] = useState(pokemonsData);
 
     const [myTeam, setMyTeam] = useState("Aucun pokémon");
+
+  // PokemonTypeFilter
+  const [filterType, setFilterType] = useState('');
+
+  const filteredPokemons = pokemons.filter((p)=> 
+    p.type.toLowerCase().includes(filterType.toLowerCase())
+  );
 
   return ( 
     <div className="App">
@@ -40,7 +49,12 @@ function App() {
           
           <PokemonDescription/>
 
-          {/* liste des favoris avec leurs noms */}
+          <PokemonTypeFilter onFilterChange={setFilterType}/>
+
+          <DisplayPokemonList 
+                pokemons={filteredPokemons} 
+                onSelect={setMyTeam} 
+                currentTeam={myTeam} />
 
       </header>
     </div>

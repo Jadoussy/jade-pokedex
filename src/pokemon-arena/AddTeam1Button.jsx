@@ -1,4 +1,4 @@
-import "./PokemonCard.css";
+import "../pokemon-card/PokemonCard.css";
 
 const AddTeam1Button = ({handleClick, myTeam}) => {
     return ( 
