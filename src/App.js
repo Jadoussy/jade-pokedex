@@ -25,9 +25,14 @@ function App() {
 
     const [myTeam, setMyTeam] = useState("Aucun pokémon");
 
-  // PokemonTypeFilter
+  // ----- PokemonTypeFilter ----- //
+
+  // va contenir la chaine de caractère rentrée par l'utilisateur
   const [filterType, setFilterType] = useState('');
 
+  // créer un nouveau tableau contenant tous les pokemons (du tableau pokemons)
+  // dont le type (p.type) correspond (.includes) à la saisie de l'utilisateur (filterType)
+  // .toLowerCase() pour que la comparaison ne soit pas sensible à la casse (les valeurs sont toutes en minuscules)
   const filteredPokemons = pokemons.filter((p)=> 
     p.type.toLowerCase().includes(filterType.toLowerCase())
   );
@@ -37,24 +42,17 @@ function App() {
       <head> <title>Mon Pokédex</title> </head>
       <header className="App-header">
 
-          {/* Composant du titre de bienvenu avec la date et heure */}
+          {/* Titre de bienvenu avec la date et heure */}
           <Welcome/>
 
-          {/* Utilisation du composant avec les data .json */}
-          <div className='pokemon-list'>
-            <DisplayPokemonList pokemons={pokemons} onSelect={setMyTeam} currentTeam={myTeam} />
-          </div>
+          {/* Affichage de la liste des pokemon et du filtre  */}
+          <PokemonTypeFilter onFilterChange={setFilterType}/>
+          {/* Les pokemons affichés sont ceux du résultat du filtre (saisie de l'utilisateur) */}
+          <DisplayPokemonList pokemons={filteredPokemons} onSelect={setMyTeam} currentTeam={myTeam} />
 
           <PokemonBattle myTeam={myTeam} onReset={() => setMyTeam("Aucun pokémon")}/>
           
           <PokemonDescription/>
-
-          <PokemonTypeFilter onFilterChange={setFilterType}/>
-
-          <DisplayPokemonList 
-                pokemons={filteredPokemons} 
-                onSelect={setMyTeam} 
-                currentTeam={myTeam} />
 
       </header>
     </div>
