@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+Bienvenue dans mon projet de Pokédex avec React.js (en JavaScript)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Le but est de m'exercer sur React.js (bibliothèque open source javascript) : la création de composants, props, useState, useEffect, useCollapse…
 
-## Available Scripts
+components/Welcome.jsx
+- Composant qui permet d'afficher l'heure et la date actuelle
+- Les données sont récupérées avec new Date pour avoir l'heure, jour, mois, année, minute, seconde, actuel.
+- Puis qui est découpé (.split('')[]) pour avoir seulement l'info qui m'intéresse (heure et date).
 
-In the project directory, you can run:
+data/pokemons.json
+- Base de données au format json : contient leurs caractéristiques et images des Pokémons.
+- Le fichier est importé dans le App.js pour être récupéré et utilisé par le composant DisplayPokemonList.
 
-### `npm start`
+pokemon-arena/
+  PokemonBattle.jsx
+  - Composant parent de AddTeam1Button
+  - Il permet de récupérer l'info quand le bouton du composant enfant AddTeam1Button est cliqué.
+  - Il réutilise cette information pour afficher le nom du Pokémon ajouté dans la div. S'il est cliqué à nouveau(bouton +), alors aucun Pokémon n'est l'équipe.
+  - Fonctionnalité future : ce composant a pour projet d'être modifié pour récupérer le type du Pokémon choisit et le faire s'affronter contre le type d'un autre Pokémon choisi au hasard parmi la liste.
+  Il affichera le vainqueur et un score qui sera mis à jour et affiché dans la page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  AddTeam1Button.jsx
+  - Composant enfant de PokemonBattle.jsx
+  - Permet de lancer la fonction handleClcick quand le bouton "+"ou" est cliqué et ajoute la valeur dans l'équipe qui sera affichée dans la div de PokemonBattle.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+pokemon-card/
+  DisplayPokemonList.jsx
+  - Composant qui permet de parcourir le tableau (pokemons.json) pour renvoyer une liste de composants PokemonCard.
+  - Il transmet pour chaque Pokémon ses caractéristiques (selon clé:valeur) et les fonctions onSelect et currentTeam pour l'équipe (utilisé pour l'arène de Pokémons).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  PokemonCard.jsx
+  - Composant qui permet d'afficher la carte (contient les détails) du Pokémon avec le style (classes, PokemonCard.css) qui correspond à la couleur du type du Pokémon (switch)
+  - Il gére le bouton d'ajout en favoris. Utilisation de useState pour stocker et mettre à jour l'info dans le code et visuellement. 
 
-### `npm run build`
+  PokemonTypeFilter.jsx 
+  - Composant qui permet de filtrer selon le type les Pokémons en récupérant les caractères tapés dans l'input.
+  - Et renvoie son résultat (filtrage) dans l'App.js pour qu'il affiche la liste filtrée (.filter).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+pokemon-description/  
+  PokemonDescription.jsx
+  - Composant parent de ChangeButton.jsx
+  - Il permet d'afficher la description suivante d'un Pokémon à chaque clic sur le bouton ChangeButton.
+  - Utilisation d'un switch pour incrémenter l'index ((setIndex(index + 1);) de navigation ou le remettre à zéro pour faire défiler les textes à l'infini.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  ChangeButton.jsx
+  - Permet de lancer une fonction (hundleClick) quand on clique sur le bouton (qui affiche une flèche).
+  - Composant enfant de PokemonDescription.jsx
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+src/App.js                
+- Point d'entrée de l'interface
+- Gère le filtrage dynamique pour coordonner l'affichage, la recherche et l'arène des Pokémons.
